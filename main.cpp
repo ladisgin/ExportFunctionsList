@@ -39,7 +39,7 @@ public:
       auto path = std::filesystem::path(tooling::getAbsolutePath(
           sm.getFilename(FullSourceLoc(fd->getLocation(), sm))));
       *fs << tab << "\"" << fd->getQualifiedNameAsString() << "\": {\n"
-          << tab << tab << "\"path\": \"" << path.lexically_normal() << "\",\n"
+          << tab << tab << "\"path\": " << path.lexically_normal() << ",\n"
           << tab << tab << "\"start\": \"" << beginLoc.getLineNumber()
           << "\",\n"
           << tab << tab << "\"start column\": \"" << beginLoc.getColumnNumber()
