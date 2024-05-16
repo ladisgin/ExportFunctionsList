@@ -36,7 +36,7 @@ public:
       }
       *fs << tab << "\"" << fd->getQualifiedNameAsString() << "\": {\n"
           << tab << tab << "\"path\": \""
-          << sm.getFilename(fd->getLocation()).str() << "\",\n"
+          << sm.getFilename(FullSourceLoc(fd->getLocation(), sm)).str() << "\",\n"
           << tab << tab << "\"start\": \"" << beginLoc.getLineNumber()
           << "\",\n"
           << tab << tab << "\"start column\": \"" << beginLoc.getColumnNumber()
