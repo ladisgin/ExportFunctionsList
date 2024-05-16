@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 
@@ -34,11 +35,11 @@ public:
       } else {
         *fs << ",\n";
       }
+
+      auto path = std::filesystem::path(tooling::getAbsolutePath(
+          sm.getFilename(FullSourceLoc(fd->getLocation(), sm))));
       *fs << tab << "\"" << fd->getQualifiedNameAsString() << "\": {\n"
-          << tab << tab << "\"path\": \""
-          << tooling::getAbsolutePath(
-                 sm.getFilename(FullSourceLoc(fd->getLocation(), sm)))
-          << "\",\n"
+          << tab << tab << "\"path\": \"" << path.lexically_normal() << "\",\n"
           << tab << tab << "\"start\": \"" << beginLoc.getLineNumber()
           << "\",\n"
           << tab << tab << "\"start column\": \"" << beginLoc.getColumnNumber()
