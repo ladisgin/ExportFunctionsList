@@ -38,6 +38,11 @@ public:
 
       auto path = std::filesystem::path(tooling::getAbsolutePath(
           sm.getFilename(FullSourceLoc(fd->getLocation(), sm))));
+
+      while (std::filesystem::exists(path) && std::filesystem::is_symlink(path)) {
+        path = std::filesystem::read_symlink(path);
+      }
+      
       *fs << tab << "\"" << fd->getQualifiedNameAsString() << "\": {\n"
           << tab << tab << "\"path\": " << path.lexically_normal() << ",\n"
           << tab << tab << "\"start\": \"" << beginLoc.getLineNumber()
